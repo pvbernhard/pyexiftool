@@ -30,7 +30,7 @@ This submodule contains the core ``ExifTool`` class of PyExifTool
 """
 
 # ---------- standard Python imports ----------
-import select
+import selectors
 import subprocess
 import os
 import shutil
@@ -114,6 +114,9 @@ def _read_fd_endswith(fd, b_endswith: bytes, block_size: int) -> bytes:
 
 		if you're not careful, on windows, this will block
 	"""
+	if not constants.PLATFORM_WINDOWS:
+		selector = selectors.DefaultSelector()
+		selector.register(fd, selectors.EVENT_READ)
 	output_list: List[bytes] = []
 
 	# if we're only looking at the last few bytes, make it meaningful.  4 is max size of \r\n? (or 2)
@@ -129,9 +132,9 @@ def _read_fd_endswith(fd, b_endswith: bytes, block_size: int) -> bytes:
 			output_list.append(os.read(fd, block_size))
 		else:  # pytest-cov:windows: no cover
 			# this does NOT work on windows... and it may not work on other systems... in that case, put more things to use the original code above
-			inputready, outputready, exceptready = select.select([fd], [], [])
-			for i in inputready:
-				if i == fd:
+			events = selector.select()
+			for key, _ in events:
+				if key.fd == fd:
 					output_list.append(os.read(fd, block_size))
 
 	return b"".join(output_list)
