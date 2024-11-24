@@ -49,6 +49,7 @@ import ctypes
 # ---------- Typing Imports ----------
 # for static analysis / type checking - Python 3.5+
 from collections.abc import Callable
+from selectors import DefaultSelector
 from typing import Optional, List, Union
 
 
@@ -115,8 +116,10 @@ def _read_fd_endswith(fd, b_endswith: bytes, block_size: int) -> bytes:
 		if you're not careful, on windows, this will block
 	"""
 	if not constants.PLATFORM_WINDOWS:
-		selector = selectors.DefaultSelector()
+		selector: Optional[DefaultSelector] = selectors.DefaultSelector()
 		selector.register(fd, selectors.EVENT_READ)
+	else:
+		selector = None
 	output_list: List[bytes] = []
 
 	# if we're only looking at the last few bytes, make it meaningful.  4 is max size of \r\n? (or 2)
@@ -136,6 +139,10 @@ def _read_fd_endswith(fd, b_endswith: bytes, block_size: int) -> bytes:
 			for key, _ in events:
 				if key.fd == fd:
 					output_list.append(os.read(fd, block_size))
+
+	if not constants.PLATFORM_WINDOWS:
+		selector.unregister(fd)
+		selector.close()
 
 	return b"".join(output_list)
 
