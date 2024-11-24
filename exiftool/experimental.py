@@ -322,7 +322,7 @@ class ExifToolAlpha(ExifToolHelper):
 			returned_source_file = result[i].get('SourceFile')
 			requested_file = file_paths[i]
 
-			if returned_source_file != requested_file:
+			if Path(returned_source_file) != Path(requested_file):
 				raise IOError(f"exiftool returned data for file {returned_source_file}, but expected was {requested_file}")
 
 	# ----------------------------------------------------------------------------------------------------------------------
