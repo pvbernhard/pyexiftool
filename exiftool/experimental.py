@@ -134,7 +134,7 @@ class ExifToolAlpha(ExifToolHelper):
 			execute_params.extend(params)
 		execute_params.extend(filenames)
 
-		result = self.execute_json(execute_params)
+		result = self.execute_json(*execute_params)
 
 		if result:
 			try:
