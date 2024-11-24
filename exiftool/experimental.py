@@ -145,7 +145,7 @@ class ExifToolAlpha(ExifToolHelper):
 				self.run()
 
 				if retry_on_error:
-					result = self.execute_json_filenames(filenames, params, retry_on_error=False)
+					result = self.execute_json_wrapper(filenames, params, retry_on_error=False)
 				else:
 					raise error
 		else:
