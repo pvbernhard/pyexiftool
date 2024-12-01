@@ -37,7 +37,7 @@ The source code can be checked out from the github repository with
 
 ::
 
-	git clone git://github.com/sylikc/pyexiftool.git
+        git clone git://github.com/sylikc/pyexiftool.git
 
 Alternatively, you can download a tarball_.  There haven't been any
 releases yet.
@@ -48,13 +48,13 @@ PyExifTool is licenced under GNU GPL version 3 or later, or BSD license.
 
 Example usage::
 
-	import exiftool
+        import exiftool
 
-	files = ["a.jpg", "b.png", "c.tif"]
-	with exiftool.ExifToolHelper() as et:
-		metadata = et.get_metadata(files)
-	for d in metadata:
-		print("{:20.20} {:20.20}".format(d["SourceFile"],
+        files = ["a.jpg", "b.png", "c.tif"]
+        with exiftool.ExifToolHelper() as et:
+                metadata = et.get_metadata(files)
+        for d in metadata:
+                print("{:20.20} {:20.20}".format(d["SourceFile"],
                                          d["EXIF:DateTimeOriginal"]))
 
 """
@@ -68,12 +68,11 @@ __version__ = "0.5.6"
 # it's best that it lives as exiftool.exceptions, to not pollute the base namespace
 from . import exceptions
 
-
 # make all of the original exiftool stuff available in this namespace
 from .exiftool import ExifTool
-from .helper import ExifToolHelper
 from .experimental import ExifToolAlpha
+from .helper import ExifToolHelper
 
 # an old feature of the original class that exposed this variable at the library level
 # TODO may remove and deprecate at a later time
-#from .constants import DEFAULT_EXECUTABLE
+# from .constants import DEFAULT_EXECUTABLE

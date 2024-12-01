@@ -28,21 +28,19 @@ This submodule defines constants which are used by other modules in the package
 
 import sys
 
-
 ##################################
 ############# HELPERS ############
 ##################################
 
 # instead of comparing everywhere sys.platform, do it all here in the constants (less typo chances)
 # True if Windows
-PLATFORM_WINDOWS: bool = (sys.platform == 'win32')
+PLATFORM_WINDOWS: bool = sys.platform == "win32"
 """sys.platform check, set to True if Windows"""
 
 # Prior to Python 3.3, the value for any Linux version is always linux2; after, it is linux.
 # https://stackoverflow.com/a/13874620/15384838
-PLATFORM_LINUX: bool = (sys.platform == 'linux' or sys.platform == 'linux2')
+PLATFORM_LINUX: bool = sys.platform == "linux" or sys.platform == "linux2"
 """sys.platform check, set to True if Linux"""
-
 
 
 ##################################
@@ -87,7 +85,6 @@ PR_SET_PDEATHSIG: int = 1
 
 Allows a kill signal to be sent to child processes when the parent unexpectedly dies
 """
-
 
 
 ##################################

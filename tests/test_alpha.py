@@ -4,20 +4,17 @@ Test :: ExifToolAlpha - misc tests
 """
 
 # standard
+import shutil
 import unittest
 from pathlib import Path
-import shutil
-
-# pip
-#from packaging import version
-
-# test helpers
-from tests.common_util import et_get_temp_dir, TEST_IMAGE_DIR
 
 # custom
 import exiftool
 
-
+# pip
+# from packaging import version
+# test helpers
+from tests.common_util import TEST_IMAGE_DIR, et_get_temp_dir
 
 
 class TestAlphaTagCopying(unittest.TestCase):
@@ -69,14 +66,11 @@ class TestAlphaTagCopying(unittest.TestCase):
 class TestAlphaSetKeywords(unittest.TestCase):
     def setUp(self):
         self.et = exiftool.ExifToolAlpha(
-            common_args=["-G", "-n", "-overwrite_original"],
-            encoding="UTF-8"
+            common_args=["-G", "-n", "-overwrite_original"], encoding="UTF-8"
         )
-
 
     def tearDown(self):
         self.et.terminate()
-
 
     def test_set_keywords(self):
         (temp_obj, temp_dir) = et_get_temp_dir(suffix="setkw")
@@ -114,8 +108,6 @@ class TestAlphaSetKeywords(unittest.TestCase):
             self.assertEqual(kwtag0, d["Keywords"])
             self.assertEqual(kwtag1, d["Keywords"][0])
             self.assertEqual(kwtag2, [d["Keywords"][0]] + kw_to_add)
-
-
 
 
 if __name__ == "__main__":

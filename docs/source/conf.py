@@ -22,21 +22,22 @@ from pathlib import Path
 # "Path.parent is a purely lexical operation
 # If you want to walk an arbitrary filesystem path upwards,
 # it is recommended to first call Path.resolve() so as to
-# resolve symlinks and eliminate “..” components."
+# resolve symlinks and eliminate '..' components."
 sys.path.insert(1, Path(__file__).resolve().parent.parent)
-
 
 
 # -- Project information -----------------------------------------------------
 
 # General information about the project.
-project = 'PyExifTool'
-copyright = '2023, Kevin M (sylikc)'
-author = 'Kevin M (sylikc)'
+project = "PyExifTool"
+copyright = "2023, Kevin M (sylikc)"
+author = "Kevin M (sylikc)"
 
 # read directly from exiftool's version instead of hard coding it here
-import exiftool
 from packaging import version as pv
+
+import exiftool
+
 et_ver = pv.parse(exiftool.__version__)
 
 # The version info for the project you're documenting, acts as replacement for
@@ -44,7 +45,7 @@ et_ver = pv.parse(exiftool.__version__)
 # built documents.
 #
 # The short X.Y version.
-version = f'{et_ver.major}.{et_ver.minor}'
+version = f"{et_ver.major}.{et_ver.minor}"
 # The full version, including alpha/beta/rc tags.
 release = exiftool.__version__
 
@@ -52,209 +53,212 @@ release = exiftool.__version__
 # -- General configuration -----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
-#needs_sphinx = '1.0'
+# needs_sphinx = '1.0'
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
-	'sphinx.ext.autodoc',  # Core library for html generation from docstrings
-	'sphinx.ext.autodoc.typehints',
-	#'sphinx.ext.autosummary',  # Create neat summary tables
-	'autoapi.extension',  # pip install sphinx-autoapi
-	'sphinx_autodoc_typehints',  # pip install sphinx-autodoc-typehints
-	'sphinx.ext.inheritance_diagram',
+    "sphinx.ext.autodoc",  # Core library for html generation from docstrings
+    "sphinx.ext.autodoc.typehints",
+    #'sphinx.ext.autosummary',  # Create neat summary tables
+    "autoapi.extension",  # pip install sphinx-autoapi
+    "sphinx_autodoc_typehints",  # pip install sphinx-autodoc-typehints
+    "sphinx.ext.inheritance_diagram",
 ]
 
-#autosummary_generate = True # Turn on sphinx.ext.autosummary
+# autosummary_generate = True # Turn on sphinx.ext.autosummary
 
 
-
-autoapi_type = 'python'
-autoapi_dirs = ['../../exiftool']
-autoapi_member_order = 'groupwise'
-#autoapi_python_use_implicit_namespaces = True
+autoapi_type = "python"
+autoapi_dirs = ["../../exiftool"]
+autoapi_member_order = "groupwise"
+# autoapi_python_use_implicit_namespaces = True
 
 # make my life easier, configure the autoapi with specific options for things that I care about ... aka
 # hide 'private-members' - inheriting classes should not have to handle or interfere with private variables
 # hide 'imported-members' - after all i import the submodules into the base namespace - don't need it to show twice
-autoapi_options = [ 'members', 'undoc-members', 'show-inheritance', 'show-inheritance-diagram', 'show-module-summary', 'special-members',  ]
-#autoapi_generate_api_docs = False
-autoapi_python_class_content = 'both'  # show __init__ with class docstring
+autoapi_options = [
+    "members",
+    "undoc-members",
+    "show-inheritance",
+    "show-inheritance-diagram",
+    "show-module-summary",
+    "special-members",
+]
+# autoapi_generate_api_docs = False
+autoapi_python_class_content = "both"  # show __init__ with class docstring
 
 
 # https://www.sphinx-doc.org/en/master/usage/extensions/autodoc.html#confval-autodoc_typehints
 # comment out when all documentation has documented parameters ... sometimes causes duplicates, but that may be a RST problem... always put links at the END of the docstring instead of in the middle
-autodoc_typehints = 'description'
+autodoc_typehints = "description"
 
 typehints_defaults = "comma"
 
 
-
 # the common names of the classes rather than the absolute paths
 inheritance_alias = {
-	'exiftool.exiftool.ExifTool': 'exiftool.ExifTool',
-	'exiftool.helper.ExifToolHelper': 'exiftool.ExifToolHelper',
-	'exiftool.experimental.ExifToolAlpha': 'exiftool.ExifToolAlpha',
+    "exiftool.exiftool.ExifTool": "exiftool.ExifTool",
+    "exiftool.helper.ExifToolHelper": "exiftool.ExifToolHelper",
+    "exiftool.experimental.ExifToolAlpha": "exiftool.ExifToolAlpha",
 }
 
 # help on attributes and Graphviz params:
 # https://www.sphinx-doc.org/en/master/usage/extensions/inheritance.html
 # https://graphs.grevian.org/reference
 # https://graphviz.org/doc/info/attrs.html
-#inheritance_graph_attrs = dict(rankdir="LR", size='"6.0, 8.0"', fontsize=14, ratio='compress')
+# inheritance_graph_attrs = dict(rankdir="LR", size='"6.0, 8.0"', fontsize=14, ratio='compress')
 inheritance_graph_attrs = dict(pad="0.2", center=True)
-inheritance_node_attrs = dict(shape='box', fontsize=14, height=0.75, color='dodgerblue1', style='rounded')
-
-
+inheritance_node_attrs = dict(
+    shape="box", fontsize=14, height=0.75, color="dodgerblue1", style="rounded"
+)
 
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # The suffix of source filenames.
-source_suffix = '.rst'
+source_suffix = ".rst"
 
 # The encoding of source files.
-#source_encoding = 'utf-8-sig'
+# source_encoding = 'utf-8-sig'
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"
 
 
 # The language for content autogenerated by Sphinx. Refer to documentation
 # for a list of supported languages.
-#language = None
+# language = None
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
-#today = ''
+# today = ''
 # Else, today_fmt is used as the format for a strftime call.
-#today_fmt = '%B %d, %Y'
+# today_fmt = '%B %d, %Y'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build']
+exclude_patterns = ["_build"]
 
 # The reST default role (used for this markup: `text`) to use for all documents.
-#default_role = None
+# default_role = None
 
 # If true, '()' will be appended to :func: etc. cross-reference text.
-#add_function_parentheses = True
+# add_function_parentheses = True
 
 # If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
-#add_module_names = True
+# add_module_names = True
 
 # If true, sectionauthor and moduleauthor directives will be shown in the
 # output. They are ignored by default.
-#show_authors = False
+# show_authors = False
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = "sphinx"
 
 # A list of ignored prefixes for module index sorting.
-#modindex_common_prefix = []
+# modindex_common_prefix = []
 
 
 # -- Options for HTML output ---------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinx_rtd_theme'  # pip install sphinx_rtd_theme
+html_theme = "sphinx_rtd_theme"  # pip install sphinx_rtd_theme
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
+# html_theme_options = {}
 
 # https://stackoverflow.com/questions/62904172/how-do-i-replace-view-page-source-with-edit-on-github-links-in-sphinx-rtd-th/62904217#62904217
 html_context = {
-	#'display_github': True,
-	'github_user': 'sylikc',
-	'github_repo': 'pyexiftool',
-	'github_version': 'master/docs/source/',
+    #'display_github': True,
+    "github_user": "sylikc",
+    "github_repo": "pyexiftool",
+    "github_version": "master/docs/source/",
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
-#html_theme_path = []
+# html_theme_path = []
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-#html_title = None
+# html_title = None
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
-#html_short_title = None
+# html_short_title = None
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-#html_logo = None
+# html_logo = None
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-#html_favicon = None
+# html_favicon = None
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
-#html_last_updated_fmt = '%b %d, %Y'
+# html_last_updated_fmt = '%b %d, %Y'
 
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
-#html_use_smartypants = True
+# html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-#html_sidebars = {}
+# html_sidebars = {}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
-#html_additional_pages = {}
+# html_additional_pages = {}
 
 # If false, no module index is generated.
-#html_domain_indices = True
+# html_domain_indices = True
 
 # If false, no index is generated.
-#html_use_index = True
+# html_use_index = True
 
 # If true, the index is split into individual pages for each letter.
-#html_split_index = False
+# html_split_index = False
 
 # If true, links to the reST sources are added to the pages.
-#html_show_sourcelink = True
+# html_show_sourcelink = True
 
 # If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
-#html_show_sphinx = True
+# html_show_sphinx = True
 
 # If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
-#html_show_copyright = True
+# html_show_copyright = True
 
 # If true, an OpenSearch description file will be output, and all pages will
 # contain a <link> tag referring to it.  The value of this option must be the
 # base URL from which the finished HTML is served.
-#html_use_opensearch = ''
+# html_use_opensearch = ''
 
 # This is the file name suffix for HTML files (e.g. ".xhtml").
-#html_file_suffix = None
+# html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'PyExifTooldoc'
+htmlhelp_basename = "PyExifTooldoc"
 
 
 # -- Options for LaTeX output --------------------------------------------------
 
 latex_elements = {
-# The paper size ('letterpaper' or 'a4paper').
-#'papersize': 'letterpaper',
-
-# The font size ('10pt', '11pt' or '12pt').
-#'pointsize': '10pt',
-
-# Additional stuff for the LaTeX preamble.
-#'preamble': '',
+    # The paper size ('letterpaper' or 'a4paper').
+    #'papersize': 'letterpaper',
+    # The font size ('10pt', '11pt' or '12pt').
+    #'pointsize': '10pt',
+    # Additional stuff for the LaTeX preamble.
+    #'preamble': '',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
@@ -268,23 +272,23 @@ latex_documents = [
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-#latex_logo = None
+# latex_logo = None
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
-#latex_use_parts = False
+# latex_use_parts = False
 
 # If true, show page references after internal links.
-#latex_show_pagerefs = False
+# latex_show_pagerefs = False
 
 # If true, show URL addresses after external links.
-#latex_show_urls = False
+# latex_show_urls = False
 
 # Documents to append as an appendix to all manuals.
-#latex_appendices = []
+# latex_appendices = []
 
 # If false, no module index is generated.
-#latex_domain_indices = True
+# latex_domain_indices = True
 
 
 # -- Options for manual page output --------------------------------------------
@@ -299,7 +303,7 @@ man_pages = [
 """
 
 # If true, show URL addresses after external links.
-#man_show_urls = False
+# man_show_urls = False
 
 
 # -- Options for Texinfo output ------------------------------------------------
@@ -316,10 +320,10 @@ texinfo_documents = [
 """
 
 # Documents to append as an appendix to all manuals.
-#texinfo_appendices = []
+# texinfo_appendices = []
 
 # If false, no module index is generated.
-#texinfo_domain_indices = True
+# texinfo_domain_indices = True
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
-#texinfo_show_urls = 'footnote'
+# texinfo_show_urls = 'footnote'
